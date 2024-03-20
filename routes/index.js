@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var fs = require("fs");
 
 let serverArray = [];
 
@@ -13,8 +13,6 @@ let NoteObject = function (pName, pType, pAddress, pStar, pURL){
     this.Star = pStar;
     this.URL= pURL;
 }
-
-var fs = require("fs");
 
 let fileManager  = {
   read: function() {
@@ -60,7 +58,7 @@ router.get('/', function(req, res, next){
 router.get('/getAllRestaurants', function(req, res) {
   fileManager.read();
   res.status(200).json(serverArray);
- }); 
+}); 
 
  /* Add one new restaurant */
 router.post('/AddRestaurant', function(req, res) {
@@ -68,12 +66,10 @@ router.post('/AddRestaurant', function(req, res) {
   serverArray.push(newRestaurant);
   fileManager.write();
   res.status(200).json(newRestaurant);
- }); 
-
+ });
 // add route for delete
 router.delete('/DeleteRestaurant/:ID', (req, res) => {
   const delID = req.params.ID;
-  let found = false;
   let pointer = GetObjectPointer(delID);
   if(pointer == -1){ // if did not find restaurant in array
     console.log("not found");

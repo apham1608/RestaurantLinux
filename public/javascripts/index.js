@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     //button on details page to delete
-    document.getElementById("delete").addEventListener("clink", function(){
+    document.getElementById("delete").addEventListener("click", function(){
         let localID = localStorage.getItem('parm');
         $.ajax({
             type: "DELETE",
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 alert(result);
             },
             error: function (xhr, textStatus, errorThrown) {
-                alert("Server could not delete Restaurant with ID " + ID)
+                alert("Server could not delete Restaurant with ID " + ID);
             }
             });
     });
@@ -97,11 +97,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
         let pointer= GetObjectPointer(localID);
         
-        document.getElementById("resturantName").innerHTML= "Name: "+NoteArray[pointer].Name;
-        document.getElementById("resturantType").innerHTML= "Type: "+NoteArray[pointer].Type;
-        document.getElementById("resturantAddress").innerHTML= "Address: "+NoteArray[pointer].Address;
-        document.getElementById("resturantStar").innerHTML= "Star-rating: "+NoteArray[pointer].Star;
-        document.getElementById("resturantURL").innerHTML="URL: "+NoteArray[pointer].URL;
+        document.getElementById("restaurantName").innerHTML= "Name: "+NoteArray[pointer].Name;
+        document.getElementById("restaurantType").innerHTML= "Type: "+NoteArray[pointer].Type;
+        document.getElementById("restaurantAddress").innerHTML= "Address: "+NoteArray[pointer].Address;
+        document.getElementById("restaurantStar").innerHTML= "Star-rating: "+NoteArray[pointer].Star;
+        document.getElementById("restaurantURL").innerHTML="URL: "+NoteArray[pointer].URL;
     });
     document.getElementById("r.Website").addEventListener("click", function(){
         openWebsite(localStorage.getItem("parm"));
