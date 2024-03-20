@@ -67,6 +67,24 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 
+
+    //button on details page to delete
+    document.getElementById("delete").addEventListener("clink", function(){
+        let localID = localStorage.getItem('parm');
+        $.ajax({
+            type: "DELETE",
+            url: "/DeleteRestaurant/" + localID,
+            success: function(result){
+                alert(result);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Server could not delete Restaurant with ID " + ID)
+            }
+            });
+    });
+   
+        
+
     $(document).on("pagebeforeshow", "#list", function(event){ //jQuery
         createList();
     });
@@ -92,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function GetObjectPointer(whichID){
     for(i=0; i<NoteArray.length; i++){
-        if(NoteArray[i].ID = whichID){
+        if(NoteArray[i].ID == whichID){
             return i;
         }
     }
