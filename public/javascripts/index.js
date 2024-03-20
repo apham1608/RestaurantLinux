@@ -23,12 +23,29 @@ document.addEventListener("DOMContentLoaded", function(){
 
     document.getElementById("buttonAdd").addEventListener("click", function (){
 
-        NoteArray.push(new NoteObject(document.getElementById("name").value, 
+        let newRestaurant = new NoteObject(document.getElementById("name").value, 
         selectedType, 
         document.getElementById("address").value, 
         starRating, 
-        document.getElementById("URL").value));
-        document.location.href="index.html#list";
+        document.getElementById("URL").value);
+        //document.location.href="index.html#list";
+
+        //push new object to server
+        $.ajax({
+            url : "/AddRestaurant",
+            type: "POST",
+            data: JSON.stringify(newRestaurant),
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                console.log(result);
+                document.location.href="index.html#list";
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Server could not add Restaurant: " + newRestaurant.Name);
+                alert(textStatus + " " + errorThrown);
+            }
+            });
+            
     });
 
 
@@ -57,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function(){
     $(document).on("pagebeforeshow", "#details", function(event){
         
         let localID= localStorage.getItem("parm");
-        
 
         NoteArray= JSON.parse(localStorage.getItem("NoteArray"));
 

@@ -30,4 +30,12 @@ router.get('/getAllRestaurants', function(req, res) {
   res.status(200).json(serverArray);
  }); 
 
+ /* Add one new restaurant */
+router.post('/AddRestaurant', function(req, res) {
+  const newRestaurant = req.body;
+  serverArray.push(newRestaurant);
+  res.status(200).json(newRestaurant);
+ }); 
+
+
 module.exports = router;
